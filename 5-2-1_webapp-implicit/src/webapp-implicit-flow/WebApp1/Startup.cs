@@ -28,10 +28,10 @@ namespace WebApp1
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    // TODO: テナント ID を入力
-                    options.Authority = $"https://login.microsoftonline.com/{"11d2f90d-cd7e-4461-9a62-5d76cd493b23"}/v2.0";
-                    // TODO: クライアント ID を入力
-                    options.ClientId = "48adc1f1-0883-448b-aed8-b8d01f379e9c";
+                    // TODO: "" にテナント ID を入力
+                    options.Authority = $"https://login.microsoftonline.com/{""}/v2.0";
+                    // TODO: "" にクライアント ID を入力
+                    options.ClientId = "";
                     options.ResponseType = "id_token";
                     options.SaveTokens = true;
                     options.CallbackPath = "/signin-oidc";

@@ -148,9 +148,9 @@ public void ConfigureServices(IServiceCollection services)
         .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
         {
             options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            // TODO: テナント ID を入力
+            // TODO: "" にテナント ID を入力
             options.Authority = $"https://login.microsoftonline.com/{""}/v2.0";
-            // TODO: クライアント ID を入力
+            // TODO: "" にクライアント ID を入力
             options.ClientId = "";
             options.ResponseType = "id_token";
             options.SaveTokens = true;
@@ -283,7 +283,7 @@ Visual Studio でブレークポイントがとまっている HomeController.cs
 
 ## まとめ
 
-ここまで Azure Active Directory とインプリシットフローを使った認証が実現できました。完成したコードは [こちら](./src) にあります。
+ここまで Azure Active Directory とインプリシットフローを使った認証が実現できました。完成したコードは [こちら](./src/webapp-implicit-flow) にあります。
 
 このワークショップでは触れませんが、参考までに <span>ASP</span>.NET Core のセキュリティについて理解を深めたい場合は以下のドキュメントをご参考ください。
 
