@@ -30,11 +30,11 @@ namespace WebApp1
                 {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     // TODO: "" にテナント ID を入力
-                    options.Authority = $"https://login.microsoftonline.com/{"11d2f90d-cd7e-4461-9a62-5d76cd493b23"}/v2.0";
+                    options.Authority = $"https://login.microsoftonline.com/{""}/v2.0";
                     // TODO: "" にクライアント ID を入力
-                    options.ClientId = "48adc1f1-0883-448b-aed8-b8d01f379e9c";
+                    options.ClientId = "";
                     // TODO: "" にクライアントシークレットを入力
-                    options.ClientSecret = "J9B7IbZ6~g..6-e2P39FmoT32~4tcePGiv";
+                    options.ClientSecret = "";
                     options.ResponseType = OpenIdConnectResponseType.Code;
                     options.SaveTokens = true;
                     options.CallbackPath = "/signin-oidc";
