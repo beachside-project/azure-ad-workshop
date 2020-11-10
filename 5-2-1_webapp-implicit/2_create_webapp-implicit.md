@@ -283,7 +283,7 @@ Visual Studio でブレークポイントがとまっている HomeController.cs
 
 ## まとめ
 
-ここまで Azure Active Directory とインプリシットフローを使った認証が実現できました。完成したコードは [こちら](./src/webapp-implicit-flow) にあります。
+ここまで Azure Active Directory とインプリシットフローを使った認証が実現できました。完成したコードは [こちら](./src) にあります。
 
 このワークショップでは触れませんが、参考までに <span>ASP</span>.NET Core のセキュリティについて理解を深めたい場合は以下のドキュメントをご参考ください。
 
