@@ -2,21 +2,15 @@
 
 ここでは、以下の開発を行います。
 
-- <span>ASP</span>.NET Core MVC のプロジェクトを作成する
-- インプリシットフローで Azure Active Directory と認証を行う
+- <span>ASP</span>.NET Core MVC のプロジェクトを新規作成
+- NuGet パッケージのインストール
+- インプリシットフローの認証を構成
+- 動作確認
 
 インプリシットフロー (Implicit flow) についての詳細は、以下のドキュメントのご参照ください。
 
 - [Microsoft identity platform and Implicit grant flow](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/v2-oauth2-implicit-grant-flow)
 
-なお、開発の主な環境は以下の構成です。
-
-- Windows 10
-- Visual Studio 2019
-- C#
-- .NET Core 3.1
-
-# > TODO: 環境構築についてどっかに書くか。
 
 <br>
 
@@ -85,7 +79,9 @@ Visual Studio 2019 を起動し、**新しいプロジェクトの作成** を�
 
 デバッグを実行するとコンソールが起動しますがブラウザは起動しません。これはこの後認証の動作を確認するためです。
 
-ブラウザの Microsoft Edge で新しい InPrivate ウィンドウ（Chrome の場合はシークレットウィンドウ）を起動します。この際、他に InPrivate ウィンドウが開かれている場合は、Cookie の共有を避けるため全て閉じてから起動してください。
+ブラウザの Microsoft Edge で InPrivate ウィンドウ（Chrome の場合はシークレットウィンドウ）がひとつも開いてないことを確認してから、新しい InPrivate ウィンドウを起動します。
+
+> 🔎 複数の InPrivate ウィンドウが開かれていると、Cookie の共有されて認証の動作を正確に確認できない可能性があるため、単一で InPrivate ウィンドウを開くことを推奨します。
 
 InPrivate ウィンドウで `https://localhost:5011` を開きます。証明書に関する警告が表示された場合は許可して進みます。
 
@@ -101,7 +97,7 @@ InPrivate ウィンドウで `https://localhost:5011` を開きます。証明�
 
 <span>ASP</span>.NET Core で Azure Active Directory の認証に利用する **Microsoft.Identity.Web** のパッケージをインストールします。
 
-> ここで利用する最小限のパッケージは Microsoft.AspNetCore.Authentication.OpenIdConnect ですが、この後のワークショップで利用するパッケージも加味して Microsoft.Identity.Web をインストールします。
+> 🔎 ここで利用する最小限のパッケージは Microsoft.AspNetCore.Authentication.OpenIdConnect ですが、この後のワークショップで利用するパッケージも加味して Microsoft.Identity.Web をインストールします。
 
 Visual Studio の上部にある検索に「nuget」と入力して **ソリューションの NuGet パッケージの管理...**をクリックします。
 
@@ -121,7 +117,7 @@ Visual Studio の上部にある検索に「nuget」と入力して **ソリュ�
 
 <br>
 
-## 📜 インプリシットフローの認証を構成する
+## 📜 インプリシットフローの認証を構成
 
 ### Startup.cs の変更
 
@@ -135,6 +131,7 @@ Azure Active Directory を利用した認証を構成します。認証の構成
 `options.Authority =$"https://login.microsoftonline.com/{"aaaa-bbbb-cccc-dddd-eeee"}/v2.0"`  
 となります。
 
+なお、using ステートメントは必要に応じて追加してください。
 
 ```cs
 public void ConfigureServices(IServiceCollection services)
@@ -201,7 +198,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 ソリューションエクスプローラーで `Controller` フォルダーの中にある `HomeController.cs` を開きます。
 
-ここでは、Privacy のページを開くときのみ認証がかかるように設定してみます。
+ここでは、Privacy のページを開くときのみ認証がかかるように設定します。
 
 - `Privacy` メソッドの上に `[Authorize]` を追加します。
 - `return View()` の行にブレークポイントをはっておきましょう。
@@ -216,13 +213,13 @@ public IActionResult Privacy()
 
 <br>
 
+## 📜 動作確認
 
-## 📜 デバッグ実行
+プロジェクトでデバッグ実行を開始し、以下の手順に沿ってブラウザーでページを開きます。
 
-デバッグ実行を開始しましょう。ブラウザーは、`https://localhost:5011` を開く前に以下のように起動して準備します。
-
-- Microsoft Edge で 新しい InPrivate ウィンドウ (または Chrome のシークレットウィンドウなど) を開く。
+- ブラウザの Microsoft Edge で InPrivate ウィンドウ（Chrome の場合はシークレットウィンドウ）がひとつも開いてないことを確認してから、新しい InPrivate ウィンドウを開く
 - ネットワークの状況を確認するために、ブラウザーの DevTools を起動してネットワークタブを開き、**ログの保持**にチェック
+- `https://localhost:5011` を開く
 
 ![image](./images/02_12.png)
 
@@ -293,4 +290,4 @@ Visual Studio でブレークポイントがとまっている HomeController.cs
 
 ---
 
-[次へ進む: Web アプリの開発 (認可コードフロー編)](./3_create_webapp-authorization-code.md)
+[次へ進む: Web アプリの開発 (認可コードフロー編)](../5-2-2_webapp-authorization-code/0_README.md)
