@@ -259,7 +259,7 @@ Azure Active Directory で保護された Web API の実装と、Web アプリ�
 
 SPA やデスクトップアプリといった他のクライアントのプログラムからでも、同様の概念の設定をすることで Web API をコールすることができます。
 
-次は、デスクトップアプリの実装のワークショップを行います。
+次は、WPF を例にしてデスクトップアプリの実装のワークショップを行います。
 
 ### 補足
 
@@ -272,6 +272,8 @@ SPA やデスクトップアプリといった他のクライアントのプロ�
 - [ASP.NET Core の構成](https://docs.microsoft.com/ja-jp/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0)
 - [ASP.NET Core での開発におけるアプリシークレットの安全な保存](https://docs.microsoft.com/ja-jp/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows)
 
+<br>
+
 ---
 
-[次へ進む: Web アプリから Web API をコールする認証の実装](../5-3_wpf/0_README.md)
+[次へ進む: デスクトップアプリ(WPF)での認証の実装](../5-3_wpf/0_README.md)
