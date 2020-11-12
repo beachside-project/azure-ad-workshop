@@ -86,18 +86,27 @@ public void ConfigureServices(IServiceCollection services)
 
 ![image](./images/02_03.png)
 
+<br>
 
-## 📜まとめ
+## 👍 まとめ
+
+おめでとうざいます 🎉。
 
 ここまで Azure Active Directory で認可コードフロー (Authorization Code Flow with PKCE)を使った認証が実現できました。完成したコードは [こちら](./src) にあります。
+
+次は、Azure Active Directory の認証で保護された Web API の開発と、ここで作成した Web アプリから Web API を呼ぶための実装を行います。
+
+### 補足
 
 このワークショップでは触れませんが、参考までに <span>ASP</span>.NET Core のセキュリティについて理解を深めたい場合は以下のドキュメントをご参考ください。
 
 - [ASP.NET Core Security の概要](https://docs.microsoft.com/ja-jp/aspnet/core/security/?view=aspnetcore-3.1)
 
-<br>
+また、ここでは説明をシンプルにするため Active Directory の情報などをソースコードに直接書きましたが、通常は以下を参考に情報を保護します。
 
-次は、Azure Active Directory の認証で保護された Web API の開発と、ここで作成した Web アプリから Web API を呼ぶための実装を行います。
+- [ASP.NET Core の構成](https://docs.microsoft.com/ja-jp/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0)
+- [ASP.NET Core での開発におけるアプリシークレットの安全な保存](https://docs.microsoft.com/ja-jp/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows)
+
 
 ---
 

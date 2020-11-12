@@ -3,7 +3,6 @@
 ここでは、以下の開発を行います。
 
 - <span>ASP</span>.NET Core MVC のプロジェクトを新規作成
-- NuGet パッケージのインストール
 - インプリシットフローの認証を構成
 - 動作確認
 
@@ -15,6 +14,8 @@
 <br>
 
 ## 📜 <span>ASP</span>.NET Core MVC のプロジェクトを新規作成
+
+### プロジェクトの作成
 
 Visual Studio 2019 を起動し、**新しいプロジェクトの作成** をクリックします。
 
@@ -45,6 +46,7 @@ Visual Studio 2019 を起動し、**新しいプロジェクトの作成** を�
 
 <br>
 
+### デバッグの構成を変更
 
 この後別の Web API を作成しこの Web アプリと同時にデバッグ実行をする都合から、この Web アプリのデバッグの構成を変更します。
 
@@ -93,9 +95,11 @@ InPrivate ウィンドウで `https://localhost:5011` を開きます。証明�
 
 <br>
 
-## NuGet パッケージのインストール
+## 📜 インプリシットフローの認証を構成
 
-<span>ASP</span>.NET Core で Azure Active Directory の認証に利用する **Microsoft.Identity.Web** のパッケージをインストールします。
+### NuGet パッケージのインストール
+
+<span>ASP</span>.NET Core で Azure Active Directory の認証に利用する **[Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web)** のパッケージをインストールします。
 
 > 🔎 ここで利用する最小限のパッケージは Microsoft.AspNetCore.Authentication.OpenIdConnect ですが、この後のワークショップで利用するパッケージも加味して Microsoft.Identity.Web をインストールします。
 
@@ -108,16 +112,14 @@ Visual Studio の上部にある検索に「nuget」と入力して **ソリュ�
 以下の操作を参考にしてインストールします。
 
 - **参照** をクリック (図①)
-- 検索で「Microsoft.Identity.Web」と入力 (図②)
-- 検索結果として表示された **Microsoft.Identity.Web** をクリック (図③)
-- インストールプロジェクトにチェック (図④)
+- 検索で「<span>Microsoft.Identity.Web</span>」と入力 (図②)
+- 検索結果として表示された **<span>Microsoft.Identity.Web</span>** をクリック (図③)
+- インストールするプロジェクトにチェック (図④)
 - **インストール** をクリック (図⑤)
 
 ![image](./images/02_11.png)
 
 <br>
-
-## 📜 インプリシットフローの認証を構成
 
 ### Startup.cs の変更
 
@@ -278,13 +280,22 @@ Visual Studio でブレークポイントがとまっている HomeController.cs
 停止しているブレークポイントを実行して進めると、Privacy の画面が表示されます。
 
 
-## まとめ
+## 👍 まとめ
+
+おめでとうざいます 🎉。
 
 ここまで Azure Active Directory とインプリシットフローを使った認証が実現できました。完成したコードは [こちら](./src) にあります。
+
+### 補足
 
 このワークショップでは触れませんが、参考までに <span>ASP</span>.NET Core のセキュリティについて理解を深めたい場合は以下のドキュメントをご参考ください。
 
 - [ASP.NET Core Security の概要](https://docs.microsoft.com/ja-jp/aspnet/core/security/?view=aspnetcore-3.1)
+
+また、ここでは説明をシンプルにするため Active Directory の情報などをソースコードに直接書きましたが、通常は以下を参考に情報を保護します。
+
+- [ASP.NET Core の構成](https://docs.microsoft.com/ja-jp/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0)
+- [ASP.NET Core での開発におけるアプリシークレットの安全な保存](https://docs.microsoft.com/ja-jp/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows)
 
 <br>
 
