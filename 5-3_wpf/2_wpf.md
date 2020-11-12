@@ -82,6 +82,8 @@ MainWindow.xaml.cs の `CallGraphButton_Click` メソッド内の最初のコー
 
 <br>
 
+コードでブレークポイントがヒットしますので、1行ずつ進めていきます。
+
 [Fiddler](https://www.telerik.com/fiddler) などのツールでネットワークを監視すると、`AcquireTokenSilent` ではネットワークの通信は発生せず、`AcquireTokenInteractive` が実行されたタイミングで Azure Active Directory の authorization エンドポイントがコールされることが確認できます。`response_type=code` になっていることから認可コードフローで認証をしていることがわかります。
 
 ![image](./images/02_05.png)
@@ -98,7 +100,7 @@ MainWindow.xaml.cs の `CallGraphButton_Click` メソッド内の最初のコー
 
 <br>
 
-認証によりトークンが取得できると、トークンを使って Microsoft Graph API をコールしています。これは、前のワークショップで Web アプリから Web API をコールした流れと同様のやり方になります。
+認証によりトークンが取得できると、以降のコードではトークンを使って Microsoft Graph API をコールしています。これは、前のワークショップで Web アプリから Web API をコールした流れと同様のやり方になりますので説明は割愛します。
 
 Microsoft Graph API の呼び出しが可能なのは、Azure Active Directory のアプリにて **API のアクセス許可** のデフォルトの定義で Microsoft Graph で自分の情報を読み取る許可がされているためです。
 
@@ -112,6 +114,7 @@ Microsoft Graph API の呼び出しが可能なのは、Azure Active Directory �
 
 (正確には、`active_directory_wpf_msgraph_v2.exe.msalcache.bin3` ファイルを削除するだけで動作します。)
 
+<br>
 
 
 ## 👍 まとめ
