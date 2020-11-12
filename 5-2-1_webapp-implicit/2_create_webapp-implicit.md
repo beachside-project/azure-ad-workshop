@@ -48,7 +48,7 @@ Visual Studio 2019 を起動し、**新しいプロジェクトの作成** を�
 
 ### デバッグの構成を変更
 
-この後別の Web API を作成しこの Web アプリと同時にデバッグ実行をする都合から、この Web アプリのデバッグの構成を変更します。
+後続のワークショップで Web API を作成しこの Web アプリと同時にデバッグ実行をする都合から、この Web アプリのデバッグの構成を変更します。
 
 **ソリューションエクスプローラー**でプロジェクト名を右クリックし(図①)、**プロパティ** をクリックしてプロジェクトのプロパティを開きます。
 
@@ -79,7 +79,7 @@ Visual Studio 2019 を起動し、**新しいプロジェクトの作成** を�
 
 <br>
 
-デバッグを実行するとコンソールが起動しますがブラウザは起動しません。これはこの後認証の動作を確認するためです。
+デバッグを実行するとコンソールが起動します。ブラウザは起動しなくなりましが、これは認証の動作を確認するために意図的に行っています。
 
 ブラウザの Microsoft Edge で InPrivate ウィンドウ（Chrome の場合はシークレットウィンドウ）がひとつも開いてないことを確認してから、新しい InPrivate ウィンドウを起動します。
 
@@ -103,7 +103,7 @@ InPrivate ウィンドウで `https://localhost:5011` を開きます。証明�
 
 > 🔎 ここで利用する最小限のパッケージは Microsoft.AspNetCore.Authentication.OpenIdConnect ですが、この後のワークショップで利用するパッケージも加味して Microsoft.Identity.Web をインストールします。
 
-Visual Studio の上部にある検索に「nuget」と入力して **ソリューションの NuGet パッケージの管理...**をクリックします。
+Visual Studio の上部にある検索に「nuget」と入力して **ソリューションの NuGet パッケージの管理**をクリックします。
 
 ![image](./images/02_10.png)
 
@@ -127,13 +127,13 @@ Azure Active Directory を利用した認証を構成します。認証の構成
 
 > 🔎 <span>ASP</span>.NET Core の startup 自体の詳細については、[公式ドキュメント](https://docs.microsoft.com/ja-jp/aspnet/core/fundamentals/startup?view=aspnetcore-3.1) をご確認下さい。
 
-ソリューションエクスプローラーで `startup.cs` を開き、`ConfigureServices` メソッドを以下のように変更します。その際 TODO と書かれてる2箇所を自身の Azure Active Directory の情報で書き換えます。
+ソリューションエクスプローラーで `startup.cs` を開き、`ConfigureServices` メソッドを以下のコードを参考に変更します。
 
-テナント ID は、値が `aaaa-bbbb-cccc-dddd-eeee` の場合、  
+- TODO と書かれてる2箇所を自身の Azure Active Directory の情報で書き換えます。
+- テナント ID は、値が `aaaa-bbbb-cccc-dddd-eeee` の場合、  
 `options.Authority =$"https://login.microsoftonline.com/{"aaaa-bbbb-cccc-dddd-eeee"}/v2.0"`  
 となります。
-
-なお、using ステートメントは必要に応じて追加してください。
+- using ステートメントは必要に応じて追加してください。
 
 ```cs
 public void ConfigureServices(IServiceCollection services)
@@ -217,6 +217,9 @@ public IActionResult Privacy()
 
 ## 📜 動作確認
 
+
+### デバッグ実行の開始
+
 プロジェクトでデバッグ実行を開始し、以下の手順に沿ってブラウザーでページを開きます。
 
 - ブラウザの Microsoft Edge で InPrivate ウィンドウ（Chrome の場合はシークレットウィンドウ）がひとつも開いてないことを確認してから、新しい InPrivate ウィンドウを開く
@@ -233,13 +236,13 @@ public IActionResult Privacy()
 
 <br>
 
-DevTools のネットワークを見てみましょう。と、Privacy を開いた際に `login.microsoftonline.com/` の authorize エンドポイントにリダイレクトされたことが確認できます(探しにくい場合は、ドキュメントのみの表示するようフィルターします）。`response_type` クエリパラメーターの値が `id_token` であることからインプリシットフローでの認証リクエストが行われていることが確認できます。
+DevTools のネットワークを見てみましょう。Privacy を開いた際に `login.microsoftonline.com/` の authorize エンドポイントにリダイレクトされたことが確認できます(探しにくい場合は、**ドキュメント**のみの表示するようフィルターします）。`response_type` クエリパラメーターの値が `id_token` であることからインプリシットフローでの認証リクエストが行われていることが確認できます。
 
 ![image](./images/02_14.png)
 
 <br>
 
-サインインを行うと、アクセス許可の同意を求める画面が表示されます。承諾すると Visual Studio のブレークポイントがヒットします。
+サインインを行うと、アクセス許可の同意を求める画面が表示されます。承諾すると Visual Studio でブレークポイントがヒットすることが確認できます。
 
 ![image](./images/02_15.png)
 
@@ -264,7 +267,7 @@ id_token の値をコピーして、https://jwt.ms を開きトークンをデ�
 
 <span>ASP</span>.NET Core では、アクセスしてきたユーザーの状態を ControllerBase クラスの `User` プロパティ (System.Security.Claims.ClaimsPrincipal) で管理しています。このオブジェクトの内容を確認します。
 
-Visual Studio でブレークポイントがとまっている HomeController.cs を見てみましょう。ブレークポイントが停まっているままの状態で、画面上部の検索で「ウォッチ」と入力し **クイック ウォッチ** を開きます。
+Visual Studio でブレークポイントがヒットした状態の HomeController.cs を見てみましょう。ブレークポイントがヒットした状態で、画面上部の検索で「ウォッチ」と入力し **クイック ウォッチ** を開きます。
 
 ![image](./images/02_18.png)
 

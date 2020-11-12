@@ -1,16 +1,23 @@
 # Web アプリから保護された Web API をコールする
 
-ここでは、Web アプリで Azure Active Directory で認証し、そのトークンを利用して Azure Active Directory で保護された Web API をコールする実装を行います。
+ここでは、以下の流れで Web アプリで Azure Active Directory で認証し、そのトークンを利用して Azure Active Directory で保護された Web API をコールする実装を行います。
+
+- Web アプリの変更と認証エラーの確認
+- Azure Active Directory のアプリ登録の変更
+- Web アプリの変更
+- 動作確認
+
+<br>
 
 ## 📜 Web アプリの変更
 
-Web アプリで認証したトークンを使って Web API をコールする実装を行います。この段階では、Azure Active Directory のアプリ間でアクセス許可の設定を行っていないため、デバッグ実行するとエラーになることを確認します。
+Web アプリで認証したトークンを使って Web API をコールする実装をしてデバッグ実行で動作確認をします。この段階では、Azure Active Directory のアプリ間でアクセス許可の設定を行っていないためデバッグ実行すると認証エラーになることを確認します。
 
-### HomeController の変更
+### HomeController.cs の変更
 
 ※ using ステートメントは適宜追加してください。
 
-まずクラスのメンバー変数に以下を追加します。
+Web アプリのプロジェクト内にある HomeController.cs を開き、 クラスのメンバー変数に以下を追加します。
 
 ```cs
 private readonly IHttpClientFactory _httpClientFactory;
@@ -18,7 +25,7 @@ private readonly IHttpClientFactory _httpClientFactory;
 
 コンストラクターの引数で `IHttpClientFactory` を受け取り、メンバー変数にセットします。
 
-> `IHttpClientFactory` の値は、Dependency Injection の機能をインスタンスを受け取るため、後ほど Startup.cs で設定を行います。
+> `IHttpClientFactory` のインスタンスは、Dependency Injection の機能を使って受け取とれるよう、後ほど Startup.cs で設定を行います。
 
 ```cs
 public HomeController(IHttpClientFactory httpClientFactory, ILogger<HomeController> logger)
@@ -28,8 +35,9 @@ public HomeController(IHttpClientFactory httpClientFactory, ILogger<HomeControll
 }
 ```
 
-以下のメソッドを HomeController クラスに追加します。  
-TODO として記載している部分について、コードでは `https://localhost:5001/weatherforecast` をセットしていますが、前のワークショップで Web API を実行したときのものをセットします。
+以下のメソッドを HomeController クラスに追加します。
+
+- TODO として記載している部分について、コードでは `https://localhost:5001/weatherforecast` をセットしていますが、正確には前のワークショップで Web API を実行したときのものをセットします。
 
 ```cs
 [Authorize]
@@ -58,12 +66,13 @@ public async Task Weather()
 }
 ```
 
+<br>
 
 ### Startup.cs の変更
 
-HomeController のコンストラクターで `IHttpClientFactory` を利用しているため、正しくインスタンスを呼び出すために Dpendency Injection の設定を行います。
+HomeController のコンストラクターで `IHttpClientFactory` のインスタンスを渡すために Dpendency Injection の設定を行います。
 
-Startup.cs を開き、`ConfigureServices` メソッドに次の一行を追加します。
+Web アプリのプロジェクトの Startup.cs を開き、`ConfigureServices` メソッドに次の一行を追加します。
 
 ```cs
 services.AddHttpClient();
@@ -71,13 +80,14 @@ services.AddHttpClient();
 
 ### ブレークポイントのセット
 
-動作確認を効率的にために、**Web アプリのプロジェクト**の HomeController.cs でブレークポイントを2箇所セットします。
+動作確認を効率的にために、**Web アプリのプロジェクト**の HomeController.cs を開き、ブレークポイントを2つセットします。
 
-1つは `Weather` メソッドがコールされたことを確認するためにアクセストークンを取得する部分にブレークポイントをセットします。
+- 1つは `Weather` メソッドがコールされたことを確認するためにアクセストークンを取得する部分にブレークポイントをセットします。
+- 2つめは `Weather` メソッド内の `response.EnsureSuccessStatusCode();` の行でブレークポイントをセットしておきます。
 
-2つめは `Weather` メソッド内の `response.EnsureSuccessStatusCode();` の行でブレークポイントをセットしておきます。
+次に **Web API のプロジェクト**では WeatherForecastController.cs を開き、ブレークポイント1つセットします。
 
-次に **Web API のプロジェクト**では、WeatherForecastController.cs の `Get` メソッドがコールされたことを確認するために `var rng = new Random();` の行にセットしておきましょう。
+- `Get` メソッドがコールされたことを確認するために `var rng = new Random();` の行にセットしておきましょう。
 
 <br>
 
@@ -111,7 +121,7 @@ Web アプリの動作を確認するために以下の手順でブラウザー�
 
 正常に Home の画面が起動したことを確認したら、ブラウザーの URL に `https://localhost:5011/home/weather` を入力してアクセスします。
 
-正常に動作していると認証の画面に遷移しますので、ログインします。正常にログインすると、`Weather` メソッドでブレークポイントがヒットします。
+正常に動作していると認証の画面に遷移します。正常にログインすると、`Weather` メソッドでブレークポイントがヒットします。これで認証がかかった状態で `Weather` が呼ばれることが確認できました。
 
 ![image](./images/03_03.png)
 
@@ -143,6 +153,8 @@ Web API のレスポンスのステータスコードについて、コードや
 
 ## 📜 アプリ登録の変更
 
+次は Azure ポータルで Active Drictory の設定を操作して、認証ができるようにします。
+
 Azure ポータルで Azure Active Directory のリソースを開き、**アプリ登録** をクリックします。ここまでのワークショップで、Azure Active Directory のアプリ登録には2つのアプリがあることが Azure ポータルで確認できます。
 
 - mstep-client-app: Web アプリで使っているアプリ
@@ -158,16 +170,17 @@ Azure ポータルで Azure Active Directory のリソースを開き、**アプ
 
 ### アプリ登録: アクセス許可の追加
 
-Web アプリで利用しているアプリを開き、**API のアクセス許可** をクリックします (図①) 。そして **アクセス許可の追加** をクリックします。
+Web アプリで利用しているアプリ (mstep-client-app) を開き、**API のアクセス許可** をクリックします (図①) 。そして **アクセス許可の追加** をクリックします。
 
 ![image](./images/03_08.png)
 
 <br>
 
-**自分の API** をクリックします (図①)。Web API 用のアプリで作成したスコープが表示されますのでクリックします (図②)。
+**自分の API** をクリックします (図①)。前のワークショップで作成したスコープが表示されますのでクリックします (図②)。
 
 ![image](./images/03_09.png)
 
+<br>
 
 以下のように設定して **アクセス許可の追加** ボタンをクリックします。
 
@@ -178,7 +191,7 @@ Web アプリで利用しているアプリを開き、**API のアクセス許�
 
 <br>
 
-追加するとアクセス許可の一覧に表示されます。登録したスコープをクリックし (図①)、スコープの ID  (図②)をメモします。
+追加するとアクセス許可の一覧に追加したスコープが表示されますのでクリックし (図①)、スコープの ID  (図②)をメモします。
 
 ![image](./images/03_11.png)
 
@@ -188,16 +201,18 @@ Web アプリで利用しているアプリを開き、**API のアクセス許�
 
 ## Web アプリのコードを変更
 
-Visual Studio で Web アプリの Startup.cs を開きます。`ConfigureServices` メソッドの中で、`AddOpenIdConnect` の options の構成の最後に以下のコードを追加します。先ほどメモをした Scope の ID を入力します。
+Web アプリのコードでこのスコープに関する設定を追加します。
+
+Visual Studio で Web アプリのプロジェクトの Startup.cs を開きます。`ConfigureServices` メソッドの中で、`AddOpenIdConnect` の options の構成の最後に以下のコードを追加します。先ほどメモをした Scope の ID を入力します。
 
 ```cs
 // TODO: "" に Scopeの IDを入力
-options.Scope.Add("api://1f2cabba-b583-44c5-8ebc-8a13bfba8aad/DefaultAccess");
+options.Scope.Add("");
 ```
 
 上コードを追加した `services.AddAuthentication(...` の部分のコードは以下のようになります。
 
-> *TODO* の全ての値が入っている想定です。
+> *TODO* で入力が必要な値は、ここまでのワークショップで入力済みの想定です。
 
 ```cs
 services.AddAuthentication(options =>
@@ -237,7 +252,7 @@ Web アプリの動作を確認するために以下の手順でブラウザー�
 
 認証の画面が表示されログイン情報を入力すると、以下のように同意画面が表示されます。これは、**アプリ登録で API のアクセス許可** の設定を行ったためです。**承諾** をクリックして進みます。
 
-> 同意画面の表示がなく、コードのブレークポイントがヒットし、かつ認証も正しく行われない場合は、設定に問題があるか、InPrivate ウィンドウを複数開いていて過去の Cookie が使いまわされたため正しく認証ができてない可能性があります。
+> 同意画面が表示されずにコードのブレークポイントがヒットし、かつ Web API をコールしても認証エラーになる場合は、設定に問題があるか InPrivate ウィンドウを複数開いるため過去の Cookie が使われてしまって正しく認証ができてない可能性があります。
 
 ![image](./images/03_12.png)
 

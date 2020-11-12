@@ -8,7 +8,7 @@ Web API の利用ケースは、クライアントのアプリが Azure Active D
 
 ## 📜 <span>ASP</span>.NET Core Web API のプロジェクトを新規作成
 
-前のコンテンツで作成した Web アプリと同じソリューションに Web API のプロジェクトを追加します。
+前のコンテンツで作成した Web アプリと同じソリューションに Web API のプロジェクトを追加して開発を進めます。
 
 ### プロジェクトの作成
 
@@ -59,11 +59,12 @@ Visual Studio のソリューションエクスプローラーでソリューシ
 
 <br>
 
-この動作は、起動時にこの URL が起動するよう Properties/launchSettings.json で定義されているためです。
-
+この動作は、起動時にこの URL が起動するよう Properties/launchSettings.json で定義されているためです。  
 コードは、Controllers/WeatherForecastController.cs の `Get` メソッドが呼ばれています。
 
-これで認証なしの状態で正常に動作することと、動作の概要が確認できました。
+ここまでで、Web API が認証なしの状態で正常に動作することを確認できました。
+
+<br>
 
 ## 📜 認証を構成
 
@@ -73,7 +74,7 @@ Visual Studio のソリューションエクスプローラーでソリューシ
 
 > 🔎 ここで利用する最小限のパッケージは Microsoft.AspNetCore.Authentication.JwtBearer ですが、前のワークショップで利用するパッケージも加味して [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) をインストールしています。
 
-Visual Studio の上部にある検索に「nuget」と入力して **ソリューションの NuGet パッケージの管理...**をクリックします。
+Visual Studio の上部にある検索に「nuget」と入力して **ソリューションの NuGet パッケージの管理** をクリックします。
 
 ![image](./images/02_07.png)
 
@@ -96,13 +97,13 @@ Visual Studio の上部にある検索に「nuget」と入力して **ソリュ�
 
 > 🔎 <span>ASP</span>.NET Core の startup 自体の詳細については、[公式ドキュメント](https://docs.microsoft.com/ja-jp/aspnet/core/fundamentals/startup?view=aspnetcore-3.1) をご確認下さい。
 
-ソリューションエクスプローラーで `startup.cs` を開き、`ConfigureServices` メソッドを以下のように変更します。その際 TODO と書かれてる2箇所を自身の Azure Active Directory の情報で書き換えます。
+ソリューションエクスプローラーで **Web API のプロジェクト** の `startup.cs` を開き、`ConfigureServices` メソッドを以下のコードを参考に変更します。
 
-テナント ID は、値が `aaaa-bbbb-cccc-dddd-eeee` の場合、  
+- TODO と書かれてる2箇所を自身の Azure Active Directory の情報で書き換えます。
+- テナント ID は、値が `aaaa-bbbb-cccc-dddd-eeee` の場合、  
 `options.Authority =$"https://login.microsoftonline.com/{"aaaa-bbbb-cccc-dddd-eeee"}/v2.0"`  
 となります。
-
-なお、using ステートメントは必要に応じて追加します。
+- using ステートメントは必要に応じて追加します。
 
 ```cs
 public void ConfigureServices(IServiceCollection services)
@@ -122,7 +123,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-> 🔎 注意点としてクライアント（前のワークショップで開発した Web アプリ) とここで開発してる Web API で Azure Active Directory のアプリが同一の場合は、Audience にクライアント ID をセットして認証を通過させることが可能です。今回はアプリが別々のため のアプリが同一の場合は、Audience に Application ID URI を設定しています。
+<br>
+
+> 🔎 クライアント（前のワークショップで開発した Web アプリ) とここで開発してる Web API で Azure Active Directory のアプリが同一の場合は、Audience にクライアント ID をセットして認証を通過させることが可能です。今回はアプリが別々のため のアプリが同一の場合は、Audience に Application ID URI を設定しています。
 
 <br>
 
@@ -150,8 +153,7 @@ public void ConfigureServices(IServiceCollection services)
         }
 ```
 
-
-
+<br>
 
 ### WeatherForecastController.cs の変更
 
@@ -168,7 +170,7 @@ public class WeatherForecastController : ControllerBase
 
 ## 📜 動作確認
 
-プロジェクトをデバッグ実行すると、HTTP Status Code が 401 (Unauthorized) で利用できなくなりました。正常な動作です。
+プロジェクトをデバッグ実行すると、認証で保護されているため HTTP Status Code が 401 (Unauthorized) でアクセス不可になりました。正常な動作です。
 
 ![image](./images/02_09.png)
 
