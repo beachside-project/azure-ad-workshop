@@ -102,20 +102,21 @@ MainWindow.xaml.cs の `CallGraphButton_Click` メソッド内の最初のコー
 
 認証によりトークンが取得できると、以降のコードではトークンを使って Microsoft Graph API をコールしています。これは、前のワークショップで Web アプリから Web API をコールした流れと同様のやり方になりますので説明は割愛します。
 
-Microsoft Graph API の呼び出しが可能なのは、Azure Active Directory のアプリにて **API のアクセス許可** のデフォルトの定義で Microsoft Graph で自分の情報を読み取る許可がされているためです。
+なお、Microsoft Graph API の呼び出しが可能なのは、Azure Active Directory のアプリにて **API のアクセス許可** のデフォルトの定義で Microsoft Graph で自分の情報を読み取る許可がされているためです。
 
-![image](./images/02_06.png)
+![image](./images/02_07.png)
 
 もう一度 **Call Microsoft Graph API** ボタンをクリックすると、キャッシュされたトークンを利用するため、Azure Active Directory にアクセス行かずに Microsoft Graph API にアクセスしていることが確認できます。
 
 <br>
 
-参考までに App.xaml.cs で `Tenant` の値を変えるとログインできる範囲が変わることも確認できます。お試しをする際はローカルディスクに保存されたキャッシュの影響でエラーが発生する可能性があるため、ソースコードのディレクトリにある bin と obj のフォルダを削除して再実行することをお勧めします。
+### クライアントアプリでのマルチテナントの構成の変更
+
+参考までに App.xaml.cs で `Tenant` の値を変えるとログインできるアカウントの範囲が変わることも確認できます。お試しをする際はローカルディスクに保存されたキャッシュの影響でエラーが発生する可能性があるため、ソースコードのディレクトリにある bin と obj のフォルダを削除して再実行することをお勧めします。
 
 (正確には、`active_directory_wpf_msgraph_v2.exe.msalcache.bin3` ファイルを削除するだけで動作します。)
 
 <br>
-
 
 ## 👍 まとめ
 
@@ -131,5 +132,5 @@ WPF での認証の実装と流れを理解し、プログラムを実行する�
 
 ---
 
-[次へ進む: デスクトップアプリ(WPF)での認証の実装](../5-4_spa/0_README.md)
+[次へ進む: SPA での認証の実装](../5-4_spa/0_README.md)
 
