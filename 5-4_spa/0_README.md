@@ -4,7 +4,7 @@ SPA のアプリを Azure Active Directory の認証で保護された WPF ア�
 
 実施する内容は以下です。
 
-- Azure Active Directory にてアプリ登録を行う
+- Azure Active Directory にて SPA 用のアプリ登録を行う
 - SPA で認証を実装する
 
 <br>

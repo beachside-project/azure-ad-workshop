@@ -6,8 +6,8 @@
 
 実施する内容は以下です。
 
-- Azure Active Directory のアプリ登録の設定を認可コードフロー (Authorization Code Flow with PKCE) に変更
-- <span>ASP</span>.NET Core MVC のプロジェクトを、認可コードフロー (Authorization Code Flow with PKCE) の認証フローができるように変更
+- Azure Active Directory のアプリ登録の設定を認可コードフロー (Authorization Code Flow with PKCE) に変更する
+- <span>ASP</span>.NET Core MVC のプロジェクトを認可コードフロー (Authorization Code Flow with PKCE) に変更する
 
 <br>
 

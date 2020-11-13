@@ -1,7 +1,6 @@
 # Azure Active Directory で認証する Web アプリの開発 (インプリシットフロー編)
 
-このワークショップでは、Azure Active Directory で認証する Web アプリの開発を行います。Web アプリは、<span>ASP</span>.NET Core MVC で実装します。
-
+このワークショップでは、Azure Active Directory で認証する Web アプリの開発を行います。Web アプリは、<span>ASP</span>.NET Core MVC で実装します。Azure Active Directory の認証は、シングルテナントの設定をします。マルチテナントの設定と認証は WPF と SPA のワークショップで行います。
 実施する内容は以下です。
 
 - Azure Active Directory のアプリ登録を行う
