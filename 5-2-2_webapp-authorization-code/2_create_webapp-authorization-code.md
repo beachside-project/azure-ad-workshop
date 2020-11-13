@@ -90,7 +90,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## 👍 まとめ
 
-おめでとうざいます 🎉。
+おめでとうざいます🎉。
 
 ここまで Azure Active Directory で認可コードフロー (Authorization Code Flow with PKCE)を使った認証が実現できました。完成したコードは [こちら](./src) にあります。
 

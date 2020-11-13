@@ -52,11 +52,11 @@ authority の値は、WPF で確認した時と基本的に同様です。WPF �
 
 ### authPopup.js の確認
 
-認証に関する主な動作は MSAL.js がカバーしています。ここでは `PublicClientApplication` のオブジェクトをインスタンス化して認可コードフロー (Authorization Code Flow with PKCE) での認証を実現しています。
+認証に関する主な動作は MSAL.js がカバーしています。`PublicClientApplication` のオブジェクトが認可コードフロー (Authorization Code Flow with PKCE) での認証を実現しています。
 
-簡単に要点を説明します。
+ソースコードで、**app/authPopup.js** を開きましょう。簡単に要点を説明します。
 
-このファイルの `signIn` メソッドがログイン時にコールされるメソッドです。このコードでログインのポップアップを表示し、ログインが成功するとトークンをキャッシュしてくれます。
+`signIn` メソッドがログイン時にコールされるメソッドです。このコードでログインのポップアップを表示し、ログインが成功すると Azure Active Directory から取得したトークンをキャッシュしてくれます。
 
 ```js
 function signIn() {
@@ -74,7 +74,9 @@ function signIn() {
 }
 ```
 
-また、トークンの取得は `getTokenPopup` メソッドで行っています。これは WPF で見たとき同様の流れです。`acquireTokenSilent` メソッドでトークンのキャッシュを取得し、キャッシュがなかったり有効期限切れの場合は `acquireTokenPopup` メソッドで取得します。
+<br>
+
+サインインした後のトークンの取得は `getTokenPopup` メソッドで行っています。これは WPF で見たコードと同様の流れです。`acquireTokenSilent` メソッドで、サインイン時に保存したトークンのキャッシュを取得し、キャッシュがない場合や有効期限切れの場合は `acquireTokenPopup` メソッドで取得します。
 
 ```js
 function getTokenPopup(request) {
@@ -106,7 +108,7 @@ function getTokenPopup(request) {
 
 `acquireTokenSilent` でトークンのキャッシュを取得し、無ければ `acquireToken***` メソッドで再取得をするのは、MSAL 共通の流れとなっています。
 
-簡単に概要レベルの説明をしましたが、詳細はオープンソースとして GitHub で公開されているリポジトリーにドキュメントがまとまっています。
+概要レベルの説明をしましたが、詳細はオープンソースとして GitHub で公開されているリポジトリーにドキュメントがまとまっています。
 
 - [microsoft-authentication-library-for-js - msal-browser - docs](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser/docs)
 
@@ -125,7 +127,7 @@ function getTokenPopup(request) {
 ![image](./images/02_03.png)
 
 > 🔎 正常に動作しない場合は以下を参考に確認します。
-> - ログインでエラーが真っ白の画面で表示されない場合は、authority の値が間違っている可能性があります。
+> - ログインの画面が真っ白になっている場合は、`authConfig.js` で設定した authority の値が間違っている可能性があります。
 > - ログイン後エラーが発生する場合は、`authConfig.js` で設定した値に問題があるか、Azure Active Drectory のアプリがマルチテナントの設定なっていない可能性があります。
 
 正常にログインできると以下のように表示されます。**See Profile** ボタンをクリックすると Microsoft Graph API から情報を取得して画面に表示されます。
@@ -133,12 +135,13 @@ function getTokenPopup(request) {
 ![image](./images/02_04.png)
 
 
-> 🔎 *See Profile** ボタンをクリックしてエラーになる場合は、graphConfig.js での設定に問題がある可能性があります。確認しましょう。
+> 🔎 **See Profile** ボタンをクリックしてエラーになる場合は、graphConfig.js での設定に問題がある可能性があります。確認しましょう。
 
+<br>
 
 ## 👍 まとめ
 
-おめでとうざいます 🎉。
+おめでとうざいます🎉。
 
 SPA での認証の実装と流れを理解し、プログラムを実行することができました。
 

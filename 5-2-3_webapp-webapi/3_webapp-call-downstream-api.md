@@ -268,7 +268,7 @@ HomeController の `Weather` メソッドで、 Web API をコールしたレス
 
 ## 👍 まとめ
 
-おめでとうざいます 🎉。
+おめでとうざいます🎉。
 
 Azure Active Directory で保護された Web API の実装と、Web アプリから Web API をコールする実装ができました。完成したコードは [こちら](./src) にあります。
 

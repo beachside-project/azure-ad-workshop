@@ -23,7 +23,7 @@ SPA (Single Page Application) のアプリケーションを Azure Acitive Direc
 ## 📜 アプリの登録: プラットフォームの追加
 
 - Azure Active Directory のリソースの左メニューで **アプリの登録** をクリックします (図①)。
-- 前ワークショップの WPF 用に作成した **mstep-client-app-multi** をクリックします。
+- 前ワークショップの WPF 用に作成した **mstep-client-app-multi** をクリックします(図②)。
 
 ![image](./images/01_02.png)
 
@@ -54,10 +54,10 @@ SPA (Single Page Application) のアプリケーションを Azure Acitive Direc
 ## 📜 まとめ
 
 以上で、SPA のアプリで Azure Active Directory の認証をするための設定ができました。
-次のワークショップでで以下の情報を利用します。メモしておきましょう。
+次のワークショップで以下の情報を利用します。メモしておきましょう。
 
 - Web のリダイレクト URI で設定した値: `http://localhost:3000/`
-- テナント ID と クライアント ID
+- クライアント ID
   - 登録したアプリの **概要** をクリックすると表示されます。
 
 <br>
