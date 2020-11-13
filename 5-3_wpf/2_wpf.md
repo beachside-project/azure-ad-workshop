@@ -9,7 +9,7 @@
 
 - https://github.com/Azure-Samples/active-directory-dotnet-desktop-msgraph-v2
 
-リポジトリーを `git clone` でクローンするかダウンロードして zip を展開して Visual Studio でコードを開きます。
+リポジトリーをクローンまたはダウンロードして zip を展開して Visual Studio でコードを開きます。
 
 <br>
 
@@ -112,9 +112,12 @@ MainWindow.xaml.cs の `CallGraphButton_Click` メソッド内の最初のコー
 
 ### クライアントアプリでのマルチテナントの構成の変更
 
-参考までに App.xaml.cs で `Tenant` の値を変えるとログインできるアカウントの範囲が変わることも確認できます。お試しをする際はローカルディスクに保存されたキャッシュの影響でエラーが発生する可能性があるため、ソースコードのディレクトリにある bin と obj のフォルダを削除して再実行することをお勧めします。
+参考までに App.xaml.cs で `Tenant` の値を変えるとログインできるアカウントの範囲が変わることも確認できます。
 
-(正確には、`active_directory_wpf_msgraph_v2.exe.msalcache.bin3` ファイルを削除するだけで動作します。)
+> 🔎 お試しをする際はローカルディスクに保存されたキャッシュの影響でエラーが発生する可能性があるため、ソースコードのディレクトリにある bin と obj のフォルダを削除して再実行することをお勧めします。  
+> (正確には、`active_directory_wpf_msgraph_v2.exe.msalcache.bin3` ファイルを削除するだけで動作します。)
+
+ここで大切なのは、Azure Active Directory のアプリ登録とクライアントのアプリの双方が適切な設定をすることで適切な認証ができる点です。この仕様を理解し、ユースケースに応じて適切な設計・設定を行いましょう。
 
 <br>
 

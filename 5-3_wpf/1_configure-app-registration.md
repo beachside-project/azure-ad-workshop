@@ -1,13 +1,12 @@
 # 🚀 Azure Active Directory でアプリ登録を構成
 
-ここでは WPF のデスクトップアプリを Azure Acitive Directory で認証するために必要な、Azure Active Directory のアプリ登録を行います。
+WPF のデスクトップアプリを Azure Acitive Directory で認証するために必要な、Azure Active Directory のアプリ登録を行います。
 
 ここでは、マルチテナント構成のアプリ登録を行います。
 
-
 ## 📜 Azure Active Directory を表示
 
-Azure ポータルから Azure Active Directory のリソースを表示します。
+ブラウザーで Azure ポータルを開き Azure Active Directory のリソースを表示します。以下を参考に表示できます。
 
 - Azure ポータル ( https://portal.azure.com ) を開きます。
 - 表示された画面上部右に表示されているディレクトリが正しいことを確認します (図①)。異なる場合はディレクトリを正しいディレクトリへ切り替えます。
