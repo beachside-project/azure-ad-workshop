@@ -1,4 +1,4 @@
-# Web アプリから Web API をコールする
+# 認証で保護された Web アプリと Web API の連携
 
 このワークショップでは、Web アプリが認証して取得したトークンを利用して、Azure Active Directory で保護された Web API をコールする実装を行います。
 

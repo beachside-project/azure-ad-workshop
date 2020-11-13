@@ -111,4 +111,4 @@ public void ConfigureServices(IServiceCollection services)
 
 ---
 
-[次へ進む: Web アプリから Web API をコールする認証の実装](../5-2-3_webapp-webapi/0_README.md)
+[次へ進む: 認証で保護された Web アプリと Web API の連携](../5-2-3_webapp-webapi/0_README.md)
