@@ -2,7 +2,6 @@
 
 ここでは Web アプリを Azure Acitive Directory で認証するために必要な、Azure Active Directory のアプリ登録を行います。
 
-
 ## 📜 Azure Active Directory を表示
 
 ブラウザーで Azure ポータルを開き Azure Active Directory のリソースを表示します。以下を参考に表示できます。
