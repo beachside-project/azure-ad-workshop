@@ -111,7 +111,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
-            // TODO: "" にテナント ID を入力
+            // TODO: your_tenant_id をテナント ID で書き換える
             options.Authority = "https://login.microsoftonline.com/your_tenant_id/v2.0";
             // TODO: "" に、API の公開で生成した Application ID URI を入力
             options.Audience = "";
