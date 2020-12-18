@@ -101,7 +101,7 @@ Visual Studio の上部にある検索に「nuget」と入力して **ソリュ�
 
 - TODO と書かれてる2箇所を自身の Azure Active Directory の情報で書き換えます。
 - テナント ID は、値が `aaaa-bbbb-cccc-dddd-eeee` の場合、  
-`options.Authority =$"https://login.microsoftonline.com/{"aaaa-bbbb-cccc-dddd-eeee"}/v2.0"`  
+`options.Authority ="https://login.microsoftonline.com/aaaa-bbbb-cccc-dddd-eeee/v2.0"`  
 となります。
 - using ステートメントは必要に応じて追加します。
 
@@ -112,7 +112,7 @@ public void ConfigureServices(IServiceCollection services)
         .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             // TODO: "" にテナント ID を入力
-            options.Authority = $"https://login.microsoftonline.com/{""}/v2.0";
+            options.Authority = "https://login.microsoftonline.com/your_tenant_id/v2.0";
             // TODO: "" に、API の公開で生成した Application ID URI を入力
             options.Audience = "";
             // 有効な Issuer を個別に登録することも可能だがここでは全ての Issuer を有効とする
